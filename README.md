@@ -1,7 +1,7 @@
 # Terraform_EC2
 
 
-### ec2.tf
+### `ec2.tf`
 - Project1을 위한 EC2 인스턴스를 설정합니다.  
 - 의존성: aws_key_pair.project1_make_keypair, aws_security_group.project1_sg
 https://github.com/it-mnm/Terraform-Study/blob/main/Terraform_EC2/ec2.tf
