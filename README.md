@@ -1,5 +1,5 @@
 # Terraform_EC2
-========
+
 ```
 #ec2.tf
 provider "aws" {
