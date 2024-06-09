@@ -1,6 +1,5 @@
 # Terraform_EC2
----
-프로젝트1을 위한 Terraform 구성
+========
 ```
 #ec2.tf
 provider "aws" {
@@ -23,7 +22,7 @@ resource "aws_instance" "project1" {
 
 의존성: aws_key_pair.project1_make_keypair, aws_security_group.project1_sg
 
-
+---------
 
 ```
 #private_key.tf
@@ -46,7 +45,7 @@ resource "local_file" "project1_downloads_key" {
 설명: RSA 개인 키를 생성하고 AWS 키페어를 관리합니다.  
 의존성: tls_private_key.project1_make_key
 
-
+--------
 
 ```
 #security.tf
@@ -85,7 +84,7 @@ resource "aws_security_group_rule" "project1_sg_egress_all" {
 설명: Project1을 위한 보안 그룹을 설정합니다.  
 의존성: var.vpc_id
 
-
+-----
 
 ```
 #variables.tf(.gitignore)
