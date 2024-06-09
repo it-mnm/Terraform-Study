@@ -19,7 +19,8 @@ resource "aws_instance" "project1" {
   }
 }
 ```
-설명: Project1을 위한 EC2 인스턴스를 설정합니다.
+설명: Project1을 위한 EC2 인스턴스를 설정합니다.  
+
 의존성: aws_key_pair.project1_make_keypair, aws_security_group.project1_sg
 
 
@@ -42,7 +43,7 @@ resource "local_file" "project1_downloads_key" {
   content  = tls_private_key.project1_make_key.private_key_pem
 }
 ```
-설명: RSA 개인 키를 생성하고 AWS 키페어를 관리합니다.
+설명: RSA 개인 키를 생성하고 AWS 키페어를 관리합니다.  
 의존성: tls_private_key.project1_make_key
 
 
@@ -81,7 +82,7 @@ resource "aws_security_group_rule" "project1_sg_egress_all" {
   security_group_id = aws_security_group.project1_sg.id
 }
 ```
-설명: Project1을 위한 보안 그룹을 설정합니다.
+설명: Project1을 위한 보안 그룹을 설정합니다.  
 의존성: var.vpc_id
 
 
