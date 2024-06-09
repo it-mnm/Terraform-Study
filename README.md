@@ -1,7 +1,10 @@
 # Terraform_EC2
 
+
+### ec2.tf
+- Project1을 위한 EC2 인스턴스를 설정합니다.  
+- 의존성: aws_key_pair.project1_make_keypair, aws_security_group.project1_sg
 ```
-#ec2.tf
 provider "aws" {
   region = "ap-northeast-2"
 }
@@ -18,15 +21,14 @@ resource "aws_instance" "project1" {
   }
 }
 ```
-설명: Project1을 위한 EC2 인스턴스를 설정합니다.  
 
-의존성: aws_key_pair.project1_make_keypair, aws_security_group.project1_sg
 
 ---------
 
+### private_key.tf
+- RSA 개인 키를 생성하고 AWS 키페어를 관리합니다.  
+- 의존성: tls_private_key.project1_make_key
 ```
-#private_key.tf
-
 resource "tls_private_key" "project1_make_key" {
   algorithm = "RSA"
   rsa_bits  = 4096
@@ -42,13 +44,15 @@ resource "local_file" "project1_downloads_key" {
   content  = tls_private_key.project1_make_key.private_key_pem
 }
 ```
-설명: RSA 개인 키를 생성하고 AWS 키페어를 관리합니다.  
-의존성: tls_private_key.project1_make_key
+
 
 --------
 
+
+### security.tf
+- Project1을 위한 보안 그룹을 설정합니다.  
+- 의존성: var.vpc_id
 ```
-#security.tf
 resource "aws_security_group" "project1_sg" {
   name_prefix = "project1-sg"
   vpc_id      = var.vpc_id
@@ -81,17 +85,16 @@ resource "aws_security_group_rule" "project1_sg_egress_all" {
   security_group_id = aws_security_group.project1_sg.id
 }
 ```
-설명: Project1을 위한 보안 그룹을 설정합니다.  
-의존성: var.vpc_id
+
 
 -----
 
-```
-#variables.tf(.gitignore)
 
+### variables.tf(.gitignore)
+- 사용할 VPC ID를 정의합니다.
+```
 variable "vpc_id" {
   type    = string
   default = "{자신의 vpc id}"
 }
 ```
-설명: 사용할 VPC ID를 정의합니다.
